@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071A1F">
+<title>UTANO — Your health. Connected.</title>
+<style>
+:root{--bg:#071A1F;--panel:#0D272D;--panel2:#123239;--text:#F4FAF8;--muted:#A8C1C0;--accent:#35D07F;--accent2:#74E7B0;--danger:#FF7A7A;--line:rgba(255,255,255,.09);--shadow:0 18px 50px rgba(0,0,0,.28)}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#06161A,#0A2026);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+.app{max-width:480px;margin:auto;min-height:100vh;background:radial-gradient(circle at 80% 0%,rgba(53,208,127,.11),transparent 32%),#071A1F;position:relative;overflow:hidden}
+header{padding:22px 20px 10px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:25px;font-weight:900;letter-spacing:.5px}.logo span{color:var(--accent)}.tag{font-size:11px;color:var(--muted);margin-top:2px}
+.iconbtn{width:42px;height:42px;border:1px solid var(--line);background:var(--panel);border-radius:14px;color:white;font-size:19px}
+main{padding:10px 18px 100px}.hello{margin:10px 0 18px}.hello small{color:var(--muted)}.hello h1{margin:4px 0;font-size:29px;line-height:1.05}
+.search{display:flex;gap:10px;background:var(--panel);border:1px solid var(--line);padding:12px 14px;border-radius:17px;margin-bottom:18px}.search input{flex:1;background:none;border:0;outline:0;color:white;font-size:15px}.search button{background:none;border:0;color:var(--accent);font-size:18px}
+.hero{background:linear-gradient(135deg,#123A36,#0C292F);border:1px solid rgba(53,208,127,.22);padding:18px;border-radius:23px;box-shadow:var(--shadow);margin-bottom:18px}.hero h2{margin:0 0 7px;font-size:20px}.hero p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}.cta{display:inline-block;margin-top:14px;background:var(--accent);color:#052017;padding:10px 14px;border-radius:12px;font-weight:800;font-size:13px}
+.section{display:flex;justify-content:space-between;align-items:center;margin:20px 2px 10px}.section h3{margin:0;font-size:16px}.section a{font-size:12px;color:var(--accent2)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.tile{padding:15px;background:var(--panel);border:1px solid var(--line);border-radius:18px;min-height:105px}.tile b{display:block;margin-top:10px;font-size:14px}.tile span{font-size:24px}.tile small{display:block;color:var(--muted);margin-top:5px;font-size:11px;line-height:1.35}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:10px}.row{display:flex;align-items:center;gap:12px}.avatar{width:46px;height:46px;border-radius:14px;background:#17463C;display:grid;place-items:center;font-weight:900;color:var(--accent2)}.card h4{margin:0 0 3px;font-size:15px}.muted{color:var(--muted);font-size:12px}.pill{margin-left:auto;font-size:10px;padding:6px 8px;border-radius:9px;background:rgba(53,208,127,.12);color:var(--accent2)}.actions{display:flex;gap:8px;margin-top:12px}.btn{flex:1;border:1px solid var(--line);background:var(--panel2);color:white;border-radius:11px;padding:10px;font-weight:700;font-size:12px}.btn.primary{background:var(--accent);color:#062018;border:0}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);background:rgba(7,26,31,.94);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:9px 10px calc(9px + env(safe-area-inset-bottom));z-index:5}.nav button{background:none;border:0;color:var(--muted);font-size:10px;padding:5px}.nav button.active{color:var(--accent)}.nav i{display:block;font-style:normal;font-size:20px;margin-bottom:3px}
+.view{display:none}.view.active{display:block}
+.back{border:0;background:none;color:var(--muted);padding:4px 0 15px;font-size:13px}
+.listsearch{margin:5px 0 14px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:flex-end;z-index:10}.modal.show{display:flex}.sheet{width:min(480px,100%);margin:auto;background:#0D272D;border-radius:25px 25px 0 0;padding:20px;box-shadow:0 -20px 60px rgba(0,0,0,.4)}.sheet h3{margin:0 0 15px}.field{margin:10px 0}.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:6px}.field input,.field select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:#071A1F;color:white}.toast{position:fixed;top:18px;left:50%;transform:translate(-50%,-80px);background:var(--accent);color:#052017;padding:11px 16px;border-radius:12px;font-size:12px;font-weight:800;z-index:20;transition:.25s}.toast.show{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div><div class="logo">UTANO<span>⌁</span></div><div class="tag">Your health. Connected.</div></div>
+  <button class="iconbtn" onclick="toast('No new notifications')">♧</button>
+</header>
+
+<main>
+<section id="home" class="view active">
+  <div class="hello"><small>Good morning</small><h1>Find the care you need.</h1></div>
+  <div class="search"><input id="homeSearch" placeholder="Search medicines, clinics or services" onkeydown="if(event.key==='Enter') openSearch()"><button onclick="openSearch()">⌕</button></div>
+  <div class="hero"><h2>Healthcare, without the runaround.</h2><p>Find participating pharmacies and clinics, check medicine availability, request appointments and keep your care journey together.</p><span class="cta" onclick="openSearch()">Search healthcare</span></div>
+
+  <div class="section"><h3>Quick access</h3><a>See all</a></div>
+  <div class="grid">
+    <div class="tile" onclick="openSearch()"><span>💊</span><b>Find medicine</b><small>Search nearby pharmacies</small></div>
+    <div class="tile" onclick="showView('care')"><span>📅</span><b>Appointments</b><small>Manage your care</small></div>
+    <div class="tile" onclick="toast('Family care is coming next')"><span>👨‍👩‍👧</span><b>My family</b><small>Coordinate authorized care</small></div>
+    <div class="tile" onclick="toast('Emergency services should be contacted directly')"><span>🚑</span><b>Emergency</b><small>Get urgent help</small></div>
+  </div>
+
+  <div class="section"><h3>Nearby care</h3><a onclick="openSearch()">View map</a></div>
+  <div class="card"><div class="row"><div class="avatar">PC</div><div><h4>PharmacyCare — Avondale</h4><div class="muted">Pharmacy · 1.8 km · Verified</div></div><span class="pill">OPEN</span></div><div class="actions"><button class="btn" onclick="toast('Opening directions…')">Directions</button><button class="btn primary" onclick="openBooking('PharmacyCare')">Contact</button></div></div>
+  <div class="card"><div class="row"><div class="avatar">MC</div><div><h4>MedConnect Clinic</h4><div class="muted">General practice · 2.4 km · Verified</div></div><span class="pill">OPEN</span></div><div class="actions"><button class="btn" onclick="toast('Clinic profile opened')">View</button><button class="btn primary" onclick="openBooking('MedConnect Clinic')">Request appointment</button></div></div>
+</section>
+
+<section id="search" class="view">
+  <button class="back" onclick="showView('home')">‹ Back</button>
+  <h1>Find healthcare</h1>
+  <div class="search listsearch"><input id="query" value="" placeholder="e.g. amoxicillin, GP, blood test" oninput="filterCards()"><button>⌕</button></div>
+  <div id="results"></div>
+</section>
+
+<section id="care" class="view">
+  <button class="back" onclick="showView('home')">‹ Back</button>
+  <h1>My care</h1>
+  <div class="card"><div class="row"><div class="avatar">AP</div><div><h4>Upcoming appointment</h4><div class="muted">MedConnect Clinic · General consultation</div></div><span class="pill">TOMORROW</span></div><div class="actions"><button class="btn" onclick="toast('Appointment details opened')">Details</button><button class="btn primary" onclick="toast('Reminder set')">Remind me</button></div></div>
+  <div class="section"><h3>Care timeline</h3></div>
+  <div class="card"><b>Today</b><div class="muted" style="margin-top:7px">Medication reminder · 20:00</div></div>
+  <div class="card"><b>28 Aug</b><div class="muted" style="margin-top:7px">Clinic appointment · 10:30</div></div>
+  <div class="card"><b>02 Sep</b><div class="muted" style="margin-top:7px">Follow-up task · Review results with provider</div></div>
+</section>
+
+<section id="profile" class="view">
+  <h1>Profile</h1>
+  <div class="card"><div class="row"><div class="avatar">LM</div><div><h4>UTANO member</h4><div class="muted">Your personal health space</div></div></div></div>
+  <div class="card"><b>Privacy & access</b><div class="muted" style="margin-top:7px">Manage who can access selected parts of your health information.</div><div class="actions"><button class="btn primary" onclick="toast('Permissions centre opened')">Manage permissions</button></div></div>
+  <div class="card"><b>Account security</b><div class="muted" style="margin-top:7px">Passcode · Device security · Sign-in activity</div></div>
+</section>
+</main>
+
+<nav class="nav">
+ <button class="active" data-view="home" onclick="showView('home')"><i>⌂</i>Home</button>
+ <button data-view="search" onclick="openSearch()"><i>⌕</i>Search</button>
+ <button data-view="care" onclick="showView('care')"><i>♡</i>My care</button>
+ <button data-view="profile" onclick="showView('profile')"><i>◉</i>Profile</button>
+</nav>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+ <div class="sheet"><h3 id="modalTitle">Request appointment</h3>
+  <div class="field"><label>Service / provider</label><input id="provider" readonly></div>
+  <div class="field"><label>Preferred date</label><input type="date" id="date"></div>
+  <div class="field"><label>Preferred time</label><select id="time"><option>09:00</option><option>10:30</option><option>12:00</option><option>14:30</option><option>16:00</option></select></div>
+  <div class="actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="submitBooking()">Send request</button></div>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const data=[
+ {icon:'PC',name:'HealthPlus Pharmacy',type:'Pharmacy',meta:'2.1 km · Verified',tags:'amoxicillin paracetamol medicine pharmacy',status:'IN STOCK'},
+ {icon:'PC',name:'PharmacyCare — Avondale',type:'Pharmacy',meta:'1.8 km · Verified',tags:'pharmacy medicine',status:'OPEN'},
+ {icon:'MC',name:'MedConnect Clinic',type:'Clinic',meta:'2.4 km · Verified',tags:'clinic doctor gp consultation',status:'OPEN'},
+ {icon:'LB',name:'PrimeLab Diagnostics',type:'Laboratory',meta:'3.0 km · Verified',tags:'blood test laboratory diagnostics',status:'OPEN'}
+];
+function showView(id){
+ document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.view===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function openSearch(){showView('search');document.getElementById('query').focus();filterCards();}
+function filterCards(){
+ const q=document.getElementById('query').value.toLowerCase().trim();
+ const out=data.filter(x=>!q || (x.name+' '+x.type+' '+x.meta+' '+x.tags).toLowerCase().includes(q));
+ document.getElementById('results').innerHTML=out.length?out.map(x=>`<div class="card"><div class="row"><div class="avatar">${x.icon}</div><div><h4>${x.name}</h4><div class="muted">${x.type} · ${x.meta}</div></div><span class="pill">${x.status}</span></div><div class="actions"><button class="btn" onclick="toast('Profile opened')">View</button><button class="btn primary" onclick="openBooking('${x.name.replaceAll("'","")}')">${x.type==='Pharmacy'?'Ask availability':'Request appointment'}</button></div></div>`).join(''):`<div class="card"><b>No participating results yet</b><div class="muted" style="margin-top:6px">Try another medicine, service or provider.</div></div>`;
+}
+function openBooking(name){document.getElementById('provider').value=name;document.getElementById('date').value=new Date(Date.now()+86400000).toISOString().slice(0,10);document.getElementById('modal').classList.add('show')}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function submitBooking(){closeModal();toast('Request sent — we’ll keep you updated')}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+filterCards();
+</script>
+</div>
+</body>
+</html>
